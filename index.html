@@ -151,12 +151,24 @@
             margin-top: 2rem;
             transition: all 0.4s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            min-height: 750px; /* Ensures space while loading */
         }
 
         .tableau-container:hover {
             transform: translateY(-5px);
             border-color: #60a5fa;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tableau-loading {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         footer {
@@ -220,11 +232,13 @@
             <p>Interact with our cutting-edge Tableau visualization, showcasing comprehensive football statistics and actionable trends. Explore the data below! 👇</p>
             <div class="tableau-container">
                 <div id="tableauViz"></div>
+                <div id="tableauLoading" class="tableau-loading">Loading Dashboard... ⚽</div>
                 <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
                 <script type='text/javascript'>
                     function initViz() {
                         var containerDiv = document.getElementById("tableauViz");
-                        var vizUrl = "https://public.tableau.com/app/profile/gilad.cohen/viz/FootballDashboardPlayers/Dashboard1";
+                        var loadingDiv = document.getElementById("tableauLoading");
+                        var vizUrl = "https://public.tableau.com/views/FootballDashboardPlayers/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link";
                         var options = {
                             width: "100%",
                             height: "750px",
@@ -232,10 +246,36 @@
                             hideToolbar: true,
                             onFirstInteractive: function() {
                                 console.log("Analytics dashboard loaded successfully");
+                                loadingDiv.style.display = "none"; // Hide loading message
+                            },
+                            onFirstVizSizeKnown: function() {
+                                console.log("Tableau viz size determined");
+                            },
+                            onError: function(event) {
+                                console.error("Error loading Tableau viz:", event);
+                                loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Failed to load dashboard. Please check your connection or try again later.</p>";
                             }
                         };
-                        var viz = new tableau.Viz(containerDiv, vizUrl, options);
+
+                        // Check if Tableau script loaded
+                        if (typeof tableau === "undefined") {
+                            console.error("Tableau JavaScript API not loaded");
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error: Tableau API failed to load.</p>";
+                            return;
+                        }
+
+                        try {
+                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+                        } catch (e) {
+                            console.error("Error initializing Tableau viz:", e);
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error loading dashboard. Please try again later.</p>";
+                        }
                     }
+
+                    // Load viz after page and scripts are ready
+                    window.addEventListener('load', function() {
+                        initViz();
+                    });
                 </script>
             </div>
         </div>
@@ -251,10 +291,6 @@
     </footer>
 
     <script>
-        window.onload = function() {
-            initViz();
-        };
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
