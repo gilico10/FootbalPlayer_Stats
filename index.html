@@ -224,7 +224,7 @@
                 <script type='text/javascript'>
                     function initViz() {
                         var containerDiv = document.getElementById("tableauViz");
-                        var vizUrl = "https://public.tableau.com/views/FootballDashboardPlayers/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link";
+                        var vizUrl = "https://public.tableau.com/views/YOUR_TABLEAU_WORKBOOK/YOUR_VIEW";
                         var options = {
                             width: "100%",
                             height: "750px",
@@ -232,21 +232,9 @@
                             hideToolbar: true,
                             onFirstInteractive: function() {
                                 console.log("Analytics dashboard loaded successfully");
-                            },
-                            onFirstVizSizeKnown: function() {
-                                console.log("Tableau viz size determined");
-                            },
-                            onError: function(event) {
-                                console.error("Error loading Tableau viz:", event);
-                                containerDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Failed to load dashboard. Please check your internet connection or try again later.</p>";
                             }
                         };
-                        try {
-                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
-                        } catch (e) {
-                            console.error("Error initializing Tableau viz:", e);
-                            containerDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Error loading dashboard. Please try again later.</p>";
-                        }
+                        var viz = new tableau.Viz(containerDiv, vizUrl, options);
                     }
                 </script>
             </div>
@@ -281,7 +269,7 @@
             sections.forEach(section => {
                 const speed = 0.1;
                 const yPos = -(window.pageYOffset * speed);
-                section.style.backgroundPositionY = ${yPos}px;
+                section.style.backgroundPositionY = `${yPos}px`;
             });
         });
     </script>
