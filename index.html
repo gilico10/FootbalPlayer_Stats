@@ -152,7 +152,9 @@
             transition: all 0.4s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             position: relative;
-            min-height: 900px;
+            min-height: 1200px; /* Increased from 900px */
+            width: 100vw; /* Match the viz width */
+            margin-left: calc(-1 * (100vw - 100%) / 2); /* Center it by offsetting container padding */
         }
 
         .tableau-container:hover {
@@ -240,13 +242,13 @@
                         var loadingDiv = document.getElementById("tableauLoading");
                         var vizUrl = "https://public.tableau.com/views/FootballDashboardPlayers/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link";
                         var options = {
-                            width: "100%", // ✅ תוקן מ-"100vw" כדי לא לפרוץ את המסגרת
-                            height: "900px",
+                            width: "100vw",  // Already full viewport width
+                            height: "1200px", // Increased from 900px
                             hideTabs: true,
                             hideToolbar: true,
                             onFirstInteractive: function() {
                                 console.log("Analytics dashboard loaded successfully");
-                                loadingDiv.style.display = "none";
+                                loadingDiv.style.display = "none"; // Hide loading message
                             },
                             onFirstVizSizeKnown: function() {
                                 console.log("Tableau viz size determined");
@@ -257,6 +259,7 @@
                             }
                         };
 
+                        // Check if Tableau script loaded
                         if (typeof tableau === "undefined") {
                             console.error("Tableau JavaScript API not loaded");
                             loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error: Tableau API failed to load.</p>";
@@ -271,6 +274,7 @@
                         }
                     }
 
+                    // Load viz after page and scripts are ready
                     window.addEventListener('load', function() {
                         initViz();
                     });
