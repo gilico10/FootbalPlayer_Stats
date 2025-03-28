@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚽ Football Analytics Platform⚽</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -152,20 +151,26 @@
             margin-top: 2rem;
             transition: all 0.4s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .tableau-container iframe {
+            position: relative;
+            min-height: 1200px; /* Increased to accommodate full content */
             width: 100%;
-            height: 750px;
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            overflow-y: auto; /* Enable vertical scrolling */
         }
 
         .tableau-container:hover {
             transform: translateY(-5px);
             border-color: #60a5fa;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tableau-loading {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 1rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         footer {
@@ -204,6 +209,7 @@
             100% { transform: scale(1); }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -225,12 +231,52 @@
 
         <div class="section" id="tableau">
             <h2>Advanced Analytics Dashboard 📊</h2>
-            <p>Interact with our Tableau visualization showcasing comprehensive football stats. 👇</p>
+            <p>Interact with our cutting-edge Tableau visualization, showcasing comprehensive football statistics and actionable trends. Explore the data below! 👇</p>
             <div class="tableau-container">
-                <iframe 
-                    src="https://public.tableau.com/views/FootballDashboard1Players/Dashboard1" 
-                    allowfullscreen>
-                </iframe>
+                <div id="tableauViz"></div>
+                <div id="tableauLoading" class="tableau-loading">Loading Dashboard... ⚽</div>
+                <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
+                <script type='text/javascript'>
+                    function initViz() {
+                        var containerDiv = document.getElementById("tableauViz");
+                        var loadingDiv = document.getElementById("tableauLoading");
+                        var vizUrl = "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link&:showVizHome=no&:embed=true";
+                        var options = {
+                            width: "100%", // Fit to container width
+                            height: "1200px", // Increased to accommodate full content
+                            hideTabs: true,
+                            hideToolbar: true,
+                            onFirstInteractive: function() {
+                                console.log("Analytics dashboard loaded successfully");
+                                loadingDiv.style.display = "none"; // Hide loading message
+                            },
+                            onFirstVizSizeKnown: function() {
+                                console.log("Tableau viz size determined");
+                            },
+                            onError: function(event) {
+                                console.error("Error loading Tableau viz:", event);
+                                loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Failed to load dashboard. Please check your internet connection or try again later.</p>";
+                            }
+                        };
+
+                        if (typeof tableau === "undefined") {
+                            console.error("Tableau JavaScript API not loaded");
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Error: Tableau API failed to load.</p>";
+                            return;
+                        }
+
+                        try {
+                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+                        } catch (e) {
+                            console.error("Error initializing Tableau viz:", e);
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Error loading dashboard. Please try again later.</p>";
+                        }
+                    }
+
+                    window.onload = function() {
+                        initViz();
+                    };
+                </script>
             </div>
         </div>
 
@@ -245,12 +291,21 @@
     </footer>
 
     <script>
-        document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const speed = 0.1;
+                const yPos = -(window.pageYOffset * speed);
+                section.style.backgroundPositionY = `${yPos}px`;
             });
         });
     </script>
