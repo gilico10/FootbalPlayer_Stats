@@ -153,6 +153,8 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             position: relative;
             min-height: 1200px;
+            width: 100vw;
+            margin-left: calc(-1 * (100vw - 100%) / 2);
         }
 
         .tableau-container:hover {
@@ -208,7 +210,6 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
 </head>
 <body>
     <header>
@@ -219,7 +220,7 @@
     <nav>
         <a href="#home">Home 🏠</a>
         <a href="#tableau">Analytics 📈</a>
-        <a href="#tableau2">More Insights 📊</a>
+        <a href="#tableau2">More Analytics 📊</a>
         <a href="#about">About ℹ️</a>
     </nav>
 
@@ -231,19 +232,102 @@
 
         <div class="section" id="tableau">
             <h2>Advanced Analytics Dashboard 📊</h2>
-            <p>Interact with our first Tableau visualization, showcasing comprehensive football statistics and actionable trends. 👇</p>
+            <p>Interact with our cutting-edge Tableau visualization, showcasing comprehensive football statistics and actionable trends. Explore the data below! 👇</p>
             <div class="tableau-container">
-                <div id="tableauViz1" style="width: 100%; height: 100%;"></div>
-                <div id="tableauLoading1" class="tableau-loading">Loading Dashboard... ⚽</div>
+                <div id="tableauViz"></div>
+                <div id="tableauLoading" class="tableau-loading">Loading Dashboard... ⚽</div>
+                <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
+                <script type='text/javascript'>
+                    function initViz() {
+                        var containerDiv = document.getElementById("tableauViz");
+                        var loadingDiv = document.getElementById("tableauLoading");
+                        var vizUrl = "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+                        var options = {
+                            width: "100vw",
+                            height: "1200px",
+                            hideTabs: true,
+                            hideToolbar: true,
+                            onFirstInteractive: function() {
+                                console.log("Analytics dashboard loaded successfully");
+                                loadingDiv.style.display = "none";
+                            },
+                            onFirstVizSizeKnown: function() {
+                                console.log("Tableau viz size determined");
+                            },
+                            onError: function(event) {
+                                console.error("Error loading Tableau viz:", event);
+                                loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Failed to load dashboard. Please check your connection or try again later.</p>";
+                            }
+                        };
+
+                        if (typeof tableau === "undefined") {
+                            console.error("Tableau JavaScript API not loaded");
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error: Tableau API failed to load.</p>";
+                            return;
+                        }
+
+                        try {
+                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+                        } catch (e) {
+                            console.error("Error initializing Tableau viz:", e);
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error loading dashboard. Please try again later.</p>";
+                        }
+                    }
+
+                    window.addEventListener('load', function() {
+                        initViz();
+                    });
+                </script>
             </div>
         </div>
 
         <div class="section" id="tableau2">
-            <h2>Player Performance Breakdown 🧠</h2>
-            <p>Dive deeper into player-specific metrics and performance trends using our second Tableau dashboard. 👇</p>
+            <h2>Additional Analytics Dashboard 📊</h2>
+            <p>Dive deeper into football insights with another powerful Tableau visualization. Explore more data below! 👇</p>
             <div class="tableau-container">
-                <div id="tableauViz2" style="width: 100%; height: 100%;"></div>
+                <div id="tableauViz2"></div>
                 <div id="tableauLoading2" class="tableau-loading">Loading Dashboard... ⚽</div>
+                <script type='text/javascript'>
+                    function initViz2() {
+                        var containerDiv = document.getElementById("tableauViz2");
+                        var loadingDiv = document.getElementById("tableauLoading2");
+                        var vizUrl = "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link";
+                        var options = {
+                            width: "100vw",
+                            height: "1200px",
+                            hideTabs: true,
+                            hideToolbar: true,
+                            onFirstInteractive: function() {
+                                console.log("Additional analytics dashboard loaded successfully");
+                                loadingDiv.style.display = "none";
+                            },
+                            onFirstVizSizeKnown: function() {
+                                console.log("Tableau viz 2 size determined");
+                            },
+                            onError: function(event) {
+                                console.error("Error loading Tableau viz 2:", event);
+                                loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Failed to load dashboard. Please check your connection or try again later.</p>";
+                            }
+                        };
+
+                        if (typeof tableau === "undefined") {
+                            console.error("Tableau JavaScript API not loaded for viz 2");
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error: Tableau API failed to load.</p>";
+                            return;
+                        }
+
+                        try {
+                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
+                        } catch (e) {
+                            console.error("Error initializing Tableau viz 2:", e);
+                            loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error loading dashboard. Please try again later.</p>";
+                        }
+                    }
+
+                    window.addEventListener('load', function() {
+                        initViz2();
+                    });
+                </script>
             </div>
         </div>
 
@@ -258,38 +342,6 @@
     </footer>
 
     <script>
-        function initViz() {
-            const viz1 = new tableau.Viz(
-                document.getElementById("tableauViz1"),
-                "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-                {
-                    width: "100%",
-                    height: "1200px",
-                    hideTabs: true,
-                    hideToolbar: true,
-                    onFirstInteractive: function () {
-                        document.getElementById("tableauLoading1").style.display = "none";
-                    }
-                }
-            );
-
-            const viz2 = new tableau.Viz(
-                document.getElementById("tableauViz2"),
-                "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
-                {
-                    width: "100%",
-                    height: "1200px",
-                    hideTabs: true,
-                    hideToolbar: true,
-                    onFirstInteractive: function () {
-                        document.getElementById("tableauLoading2").style.display = "none";
-                    }
-                }
-            );
-        }
-
-        window.addEventListener('load', initViz);
-
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
