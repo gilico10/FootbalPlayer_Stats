@@ -240,13 +240,13 @@
                         var loadingDiv = document.getElementById("tableauLoading");
                         var vizUrl = "https://public.tableau.com/views/FootballDashboardPlayers/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link";
                         var options = {
-                            width: "100vw",  // Changed to full viewport width
-                            height: "900px", // Kept as previously increased
+                            width: "100%", // ✅ תוקן מ-"100vw" כדי לא לפרוץ את המסגרת
+                            height: "900px",
                             hideTabs: true,
                             hideToolbar: true,
                             onFirstInteractive: function() {
                                 console.log("Analytics dashboard loaded successfully");
-                                loadingDiv.style.display = "none"; // Hide loading message
+                                loadingDiv.style.display = "none";
                             },
                             onFirstVizSizeKnown: function() {
                                 console.log("Tableau viz size determined");
@@ -257,7 +257,6 @@
                             }
                         };
 
-                        // Check if Tableau script loaded
                         if (typeof tableau === "undefined") {
                             console.error("Tableau JavaScript API not loaded");
                             loadingDiv.innerHTML = "<p style='color: #ff6b6b;'>Error: Tableau API failed to load.</p>";
@@ -272,7 +271,6 @@
                         }
                     }
 
-                    // Load viz after page and scripts are ready
                     window.addEventListener('load', function() {
                         initViz();
                     });
