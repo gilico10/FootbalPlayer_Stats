@@ -208,6 +208,7 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
 </head>
 <body>
     <header>
@@ -230,17 +231,19 @@
 
         <div class="section" id="tableau">
             <h2>Advanced Analytics Dashboard 📊</h2>
-            <p>Interact with our cutting-edge Tableau visualization, showcasing comprehensive football statistics and actionable trends. Explore the data below! 👇</p>
+            <p>Interact with our first Tableau visualization, showcasing comprehensive football statistics and actionable trends. 👇</p>
             <div class="tableau-container">
-                <iframe src="https://public.tableau.com/app/profile/gilad.cohen/viz/FootballDashboard1Players/Dashboard1" width="100%" height="1200" frameborder="0"></iframe>
+                <div id="tableauViz1" style="width: 100%; height: 100%;"></div>
+                <div id="tableauLoading1" class="tableau-loading">Loading Dashboard... ⚽</div>
             </div>
         </div>
 
         <div class="section" id="tableau2">
             <h2>Player Performance Breakdown 🧠</h2>
-            <p>Dive deeper into player-specific metrics and performance trends using the second Tableau dashboard. 👇</p>
+            <p>Dive deeper into player-specific metrics and performance trends using our second Tableau dashboard. 👇</p>
             <div class="tableau-container">
-                <iframe src="https://public.tableau.com/app/profile/gilad.cohen/viz/FootballDashboard2Players/Dashboard2" width="100%" height="1200" frameborder="0"></iframe>
+                <div id="tableauViz2" style="width: 100%; height: 100%;"></div>
+                <div id="tableauLoading2" class="tableau-loading">Loading Dashboard... ⚽</div>
             </div>
         </div>
 
@@ -255,6 +258,38 @@
     </footer>
 
     <script>
+        function initViz() {
+            const viz1 = new tableau.Viz(
+                document.getElementById("tableauViz1"),
+                "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1",
+                {
+                    width: "100%",
+                    height: "1200px",
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        document.getElementById("tableauLoading1").style.display = "none";
+                    }
+                }
+            );
+
+            const viz2 = new tableau.Viz(
+                document.getElementById("tableauViz2"),
+                "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2",
+                {
+                    width: "100%",
+                    height: "1200px",
+                    hideTabs: true,
+                    hideToolbar: true,
+                    onFirstInteractive: function () {
+                        document.getElementById("tableauLoading2").style.display = "none";
+                    }
+                }
+            );
+        }
+
+        window.addEventListener('load', initViz);
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
