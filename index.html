@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>⚽ Football Analytics Platform⚽</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', 'Roboto', sans-serif;
             background: linear-gradient(145deg, #0f172a, #1e293b, #334155);
@@ -19,7 +15,6 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-
         header {
             padding: 4rem 2rem 3rem;
             text-align: center;
@@ -27,7 +22,6 @@
             position: relative;
             overflow: hidden;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -38,7 +32,6 @@
             background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
             animation: pulse 10s infinite;
         }
-
         h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -47,7 +40,6 @@
             position: relative;
             animation: fadeInDown 1s ease-out;
         }
-
         nav {
             padding: 1.2rem;
             background: rgba(30, 41, 59, 0.98);
@@ -57,7 +49,6 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
         }
-
         nav a {
             color: #e2e8f0;
             text-decoration: none;
@@ -69,7 +60,6 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
         nav a::after {
             content: '';
             position: absolute;
@@ -80,21 +70,13 @@
             background: #60a5fa;
             transition: width 0.3s ease;
         }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            color: #60a5fa;
-        }
-
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: #60a5fa; }
         .container {
             max-width: 1320px;
             margin: 3rem auto;
             padding: 0 2rem;
         }
-
         .section {
             background: rgba(30, 41, 59, 0.85);
             padding: 3rem;
@@ -106,43 +88,13 @@
             position: relative;
             overflow: hidden;
         }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #60a5fa, transparent);
-        }
-
         h2 {
             color: #60a5fa;
             font-weight: 700;
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
         }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 2px;
-            bottom: -8px;
-            left: 0;
-            background: #60a5fa;
-            opacity: 0.3;
-        }
-
-        p {
-            font-size: 1.15rem;
-            color: #cbd5e1;
-            max-width: 800px;
-        }
-
+        p { font-size: 1.15rem; color: #cbd5e1; max-width: 800px; }
         .tableau-container {
             padding: 1.5rem;
             border: 2px solid rgba(96, 165, 250, 0.3);
@@ -151,28 +103,7 @@
             margin-top: 2rem;
             transition: all 0.4s ease;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-            min-height: 1200px; /* Increased to accommodate full content */
-            width: 100%;
-            overflow-y: auto; /* Enable vertical scrolling */
         }
-
-        .tableau-container:hover {
-            transform: translateY(-5px);
-            border-color: #60a5fa;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .tableau-loading {
-            text-align: center;
-            color: #94a3b8;
-            font-size: 1rem;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
         footer {
             padding: 2.5rem;
             background: rgba(15, 23, 42, 0.9);
@@ -181,7 +112,6 @@
             color: #94a3b8;
             position: relative;
         }
-
         footer::before {
             content: '';
             position: absolute;
@@ -192,24 +122,7 @@
             background: #60a5fa;
             transform: translateX(-50%);
         }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -230,53 +143,15 @@
         </div>
 
         <div class="section" id="tableau">
-            <h2>Advanced Analytics Dashboard 📊</h2>
-            <p>Interact with our cutting-edge Tableau visualization, showcasing comprehensive football statistics and actionable trends. Explore the data below! 👇</p>
+            <h2>Advanced Analytics Dashboards 📊</h2>
+            <p>Explore our two powerful Tableau dashboards:</p>
+
             <div class="tableau-container">
-                <div id="tableauViz"></div>
-                <div id="tableauLoading" class="tableau-loading">Loading Dashboard... ⚽</div>
-                <script type='text/javascript' src='https://public.tableau.com/javascripts/api/tableau-2.min.js'></script>
-                <script type='text/javascript'>
-                    function initViz() {
-                        var containerDiv = document.getElementById("tableauViz");
-                        var loadingDiv = document.getElementById("tableauLoading");
-                        var vizUrl = "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link&:showVizHome=no&:embed=true";
-                        var options = {
-                            width: "100%", // Fit to container width
-                            height: "1200px", // Increased to accommodate full content
-                            hideTabs: true,
-                            hideToolbar: true,
-                            onFirstInteractive: function() {
-                                console.log("Analytics dashboard loaded successfully");
-                                loadingDiv.style.display = "none"; // Hide loading message
-                            },
-                            onFirstVizSizeKnown: function() {
-                                console.log("Tableau viz size determined");
-                            },
-                            onError: function(event) {
-                                console.error("Error loading Tableau viz:", event);
-                                loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Failed to load dashboard. Please check your internet connection or try again later.</p>";
-                            }
-                        };
+                <div id="tableauViz1"></div>
+            </div>
 
-                        if (typeof tableau === "undefined") {
-                            console.error("Tableau JavaScript API not loaded");
-                            loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Error: Tableau API failed to load.</p>";
-                            return;
-                        }
-
-                        try {
-                            var viz = new tableau.Viz(containerDiv, vizUrl, options);
-                        } catch (e) {
-                            console.error("Error initializing Tableau viz:", e);
-                            loadingDiv.innerHTML = "<p style='color: #ff6b6b; text-align: center;'>Error loading dashboard. Please try again later.</p>";
-                        }
-                    }
-
-                    window.onload = function() {
-                        initViz();
-                    };
-                </script>
+            <div class="tableau-container">
+                <div id="tableauViz2"></div>
             </div>
         </div>
 
@@ -290,22 +165,28 @@
         <p>© 2025 Football Analytics Platform | Engineered for Excellence in Football Intelligence ❤️</p>
     </footer>
 
+    <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
     <script>
+        function initViz() {
+            const viz1 = new tableau.Viz(
+                document.getElementById("tableauViz1"),
+                "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link",
+                { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
+            );
+
+            const viz2 = new tableau.Viz(
+                document.getElementById("tableauViz2"),
+                "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link",
+                { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
+            );
+        }
+
+        window.onload = initViz;
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                const speed = 0.1;
-                const yPos = -(window.pageYOffset * speed);
-                section.style.backgroundPositionY = `${yPos}px`;
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
