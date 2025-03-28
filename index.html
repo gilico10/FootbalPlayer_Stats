@@ -1,194 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>⚽ Football Analytics Platform⚽</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', 'Roboto', sans-serif;
-            background: linear-gradient(145deg, #0f172a, #1e293b, #334155);
-            color: #e2e8f0;
-            min-height: 100vh;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        header {
-            padding: 4rem 2rem 3rem;
-            text-align: center;
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
-            position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
-            animation: pulse 10s infinite;
-        }
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #f8fafc;
-            position: relative;
-            animation: fadeInDown 1s ease-out;
-        }
-        nav {
-            padding: 1.2rem;
-            background: rgba(30, 41, 59, 0.98);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-        nav a {
-            color: #e2e8f0;
-            text-decoration: none;
-            margin: 0 2rem;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: #60a5fa;
-            transition: width 0.3s ease;
-        }
-        nav a:hover::after { width: 100%; }
-        nav a:hover { color: #60a5fa; }
-        .container {
-            max-width: 1320px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-        }
-        .section {
-            background: rgba(30, 41, 59, 0.85);
-            padding: 3rem;
-            border-radius: 16px;
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            animation: fadeInUp 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-        h2 {
-            color: #60a5fa;
-            font-weight: 700;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        p { font-size: 1.15rem; color: #cbd5e1; max-width: 800px; }
-        .tableau-container {
-            padding: 1.5rem;
-            border: 2px solid rgba(96, 165, 250, 0.3);
-            border-radius: 16px;
-            background: rgba(15, 23, 42, 0.6);
-            margin-top: 2rem;
-            transition: all 0.4s ease;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            padding: 2.5rem;
-            background: rgba(15, 23, 42, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.95rem;
-            color: #94a3b8;
-            position: relative;
-        }
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 100px;
-            height: 1px;
-            background: #60a5fa;
-            transform: translateX(-50%);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚽ Football Analytics Platform⚽</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', 'Roboto', sans-serif;
+      background: linear-gradient(145deg, #0f172a, #1e293b, #334155);
+      color: #e2e8f0;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+      animation: pulse 10s infinite;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #f8fafc;
+      position: relative;
+      animation: fadeInDown 1s ease-out;
+    }
+    nav {
+      padding: 1.2rem;
+      background: rgba(30, 41, 59, 0.98);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    nav a {
+      color: #e2e8f0;
+      text-decoration: none;
+      margin: 0 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: #60a5fa;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after { width: 100%; }
+    nav a:hover { color: #60a5fa; }
+    .container {
+      max-width: 1320px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+    .section {
+      background: rgba(30, 41, 59, 0.85);
+      padding: 3rem;
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      animation: fadeInUp 0.8s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+    h2 {
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    p { font-size: 1.15rem; color: #cbd5e1; max-width: 800px; }
+    .tableau-container {
+      padding: 1.5rem;
+      border: 2px solid rgba(96, 165, 250, 0.3);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.6);
+      margin-top: 2rem;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+      padding: 2.5rem;
+      background: rgba(15, 23, 42, 0.9);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.95rem;
+      color: #94a3b8;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100px;
+      height: 1px;
+      background: #60a5fa;
+      transform: translateX(-50%);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>⚽ Football Analytics Platform⚽</h1>
-        <p>Precision Insights for the Modern Game</p>
-    </header>
+  <header>
+    <h1>⚽ Football Analytics Platform⚽</h1>
+    <p>Precision Insights for the Modern Game</p>
+  </header>
 
-    <nav>
-        <a href="#home">Home 🏠</a>
-        <a href="#tableau">Analytics 📈</a>
-        <a href="#about">About ℹ️</a>
-    </nav>
+  <nav>
+    <a href="#home">Home 🏠</a>
+    <a href="#tableau">Analytics 📈</a>
+    <a href="#about">About ℹ️</a>
+  </nav>
 
-    <div class="container">
-        <div class="section" id="home">
-            <h2>Welcome to Elite Football Analytics 👋</h2>
-            <p>Uncover the game’s deepest insights with our state-of-the-art platform. Tailored for analysts, coaches, and passionate fans, we deliver unparalleled statistical precision. 🌟</p>
-        </div>
-
-        <div class="section" id="tableau">
-            <h2>Advanced Analytics Dashboards 📊</h2>
-            <p>Explore our two powerful Tableau dashboards:</p>
-
-            <div class="tableau-container">
-                <div id="tableauViz1"></div>
-            </div>
-
-            <div class="tableau-container">
-                <div id="tableauViz2"></div>
-            </div>
-        </div>
-
-        <div class="section" id="about">
-            <h2>About Our Mission ℹ️</h2>
-            <p>Our team of expert analysts and data scientists is dedicated to revolutionizing football analysis. We provide premium, data-driven insights to elevate your understanding of the sport. 🏟️</p>
-        </div>
+  <div class="container">
+    <div class="section" id="home">
+      <h2>Welcome to Elite Football Analytics 👋</h2>
+      <p>Uncover the game’s deepest insights with our state-of-the-art platform. Tailored for analysts, coaches, and passionate fans, we deliver unparalleled statistical precision. 🌟</p>
     </div>
 
-    <footer>
-        <p>© 2025 Football Analytics Platform | Engineered for Excellence in Football Intelligence ❤️</p>
-    </footer>
+    <div class="section" id="tableau">
+      <h2>Advanced Analytics Dashboards 📊</h2>
+      <p>Explore our two powerful Tableau dashboards:</p>
 
-    <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
-    <script>
-        function initViz() {
-            const viz1 = new tableau.Viz(
-                document.getElementById("tableauViz1"),
-                "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link",
-                { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
-            );
+      <div class="tableau-container">
+        <div id="tableauViz1"></div>
+      </div>
 
-            const viz2 = new tableau.Viz(
-                document.getElementById("tableauViz2"),
-                "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link",
-                { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
-            );
-        }
+      <div class="tableau-container">
+        <div id="tableauViz2"></div>
+      </div>
+    </div>
 
-        window.onload = initViz;
+    <div class="section" id="about">
+      <h2>About Our Mission ℹ️</h2>
+      <p>Our team of expert analysts and data scientists is dedicated to revolutionizing football analysis. We provide premium, data-driven insights to elevate your understanding of the sport. 🏟️</p>
+    </div>
+  </div>
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
+  <footer>
+    <p>© 2025 Football Analytics Platform | Engineered for Excellence in Football Intelligence ❤️</p>
+  </footer>
+
+  <script src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <script>
+    function initViz() {
+      new tableau.Viz(
+        document.getElementById("tableauViz1"),
+        "https://public.tableau.com/views/FootballDashboard1Players/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link",
+        { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
+      );
+
+      new tableau.Viz(
+        document.getElementById("tableauViz2"),
+        "https://public.tableau.com/views/FootballDashboard2Players/Dashboard2?:language=en-US&:display_count=n&:origin=viz_share_link",
+        { width: "100%", height: "750px", hideTabs: true, hideToolbar: true }
+      );
+    }
+
+    window.onload = initViz;
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
